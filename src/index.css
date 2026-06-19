@@ -1,2 +1,31 @@
 @import "tailwindcss";
 
+@media print {
+
+  /* Hide everything first */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show preview only */
+  #preview-section,
+  #preview-section * {
+    visibility: visible;
+  }
+
+  /* Place preview at top-left of printable page */
+  #preview-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+  }
+
+  /* Hide form explicitly */
+  #form-section {
+    display: none !important;
+  }
+}

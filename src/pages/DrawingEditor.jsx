@@ -122,7 +122,7 @@ export default function DrawingEditor() {
 
             <div className="grid lg:grid-cols-[450px_1fr] gap-6">
 
-                <div className="space-y-5">
+                <div id="form-section" className="space-y-5">
 
                     <FormSection title="Dimensions">
                         {Object.keys(data)
@@ -186,23 +186,16 @@ export default function DrawingEditor() {
                     <div className="flex gap-3">
 
                         <button
-                            onClick={exportPdf}
-                            className="bg-green-600 text-white px-4 py-2 rounded"
-                        >
-                            <Download size={18} />
-                        </button>
-
-                        <button
                             onClick={() => window.print()}
-                            className="bg-blue-600 text-white px-4 py-2 rounded"
+                            className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
                         >
-                            <Printer size={18} />
+                            <Printer size={30} />
                         </button>
 
                     </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl shadow">
+                <div id="preview-section" className="bg-white p-4 rounded-xl shadow">
                     <DrawingPreview
                         data={data}
                         previewRef={previewRef}
