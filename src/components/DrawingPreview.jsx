@@ -21,11 +21,161 @@ export default function DrawingPreview({ data, rows, previewRef, editRow, delete
                 className="w-[200px] absolute top-[10px] right-[-10px]"
             />
 
-            <img
-                src={template2}
-                alt=""
-                className="w-[200px] absolute top-[250px] right-[-10px]"
-            />
+            <div>
+                <div className="absolute top-[230px] right-[50px]">
+                    <svg width="180" height="220" viewBox="0 0 180 220">
+
+                        {/* Outer Frame */}
+                        <rect
+                            x="40"
+                            y="20"
+                            width="80"
+                            height="120"
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="2"
+                        />
+
+                        {/* Inner Frame */}
+                        <rect
+                            x="50"
+                            y="30"
+                            width="60"
+                            height="100"
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="1.5"
+                        />
+
+                        {/* Filter Pleats */}
+                        {Array.from({ length: 18 }).map((_, i) => (
+                            <line
+                                key={i}
+                                x1="55"
+                                y1={35 + i * 5}
+                                x2="105"
+                                y2={35 + i * 5}
+                                stroke="black"
+                                strokeWidth="1"
+                            />
+                        ))}
+
+                        {/* Vertical Dimension B */}
+
+                        <line x1="150" y1="20" x2="150" y2="140" stroke="black" />
+
+                        <polygon points="147,25 150,15 153,25" fill="black" />
+                        <polygon points="147,135 150,145 153,135" fill="black" />
+
+                        <line x1="120" y1="20" x2="160" y2="20" stroke="black" />
+                        <line x1="120" y1="140" x2="160" y2="140" stroke="black" />
+
+                        <text
+                            x="155"
+                            y="95"
+                            fontSize="10"
+                            transform="rotate(-90 155 85)"
+                        >
+                            B
+                        </text>
+
+                        {/* Horizontal Dimension A */}
+
+                        <line x1="40" y1="170" x2="120" y2="170" stroke="black" />
+
+                        <polygon points="45,167 40,170 45,173" fill="black" />
+                        <polygon points="115,167 120,170 115,173" fill="black" />
+
+                        <line x1="40" y1="140" x2="40" y2="180" stroke="black" />
+                        <line x1="120" y1="140" x2="120" y2="180" stroke="black" />
+
+                        <text
+                            x="77"
+                            y="185"
+                            fontSize="10"
+                        >
+                            A
+                        </text>
+
+                    </svg>
+
+                    <div className="text-center font-bold text-md">
+                        FRONT VIEW
+                    </div>
+                </div>
+                <div className="absolute top-[230px] right-[-100px]">
+                    <svg width="120" height="220" viewBox="0 0 120 220">
+
+                        {/* Outer Frame */}
+                        <rect
+                            x="45"
+                            y="20"
+                            width="30"
+                            height="150"
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="1.5"
+                        />
+
+                        {/* Pleated Media */}
+                        <path
+                            d="
+                                    M45 25
+                                    L75 35
+                                    L45 45
+                                    L75 55
+                                    L45 65
+                                    L75 75
+                                    L45 85
+                                    L75 95
+                                    L45 105
+                                    L75 115
+                                    L45 125
+                                    L75 135
+                                    L45 145
+                                    L75 155
+                                    L45 165
+                                "
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="1"
+                        />
+
+                        {/* Dimension Arrow Left */}
+                        <line x1="20" y1="30" x2="20" y2="160" stroke="black" />
+                        <polygon points="17,35 20,25 23,35" fill="black" />
+                        <polygon points="17,155 20,165 23,155" fill="black" />
+
+                        <text
+                            x="20"
+                            y="90"
+                            fontSize="10"
+                            transform="rotate(-90 25 100)"
+                        >
+                            CXD
+                        </text>
+
+                        {/* Bottom Depth E */}
+                        <line x1="45" y1="185" x2="75" y2="185" stroke="black" />
+
+                        <polygon points="50,182 45,185 50,188" fill="black" />
+                        <polygon points="70,182 75,185 70,188" fill="black" />
+
+                        <text x="58" y="200" fontSize="10">
+                            E
+                        </text>
+
+                        {/* Extension Lines */}
+                        <line x1="45" y1="170" x2="45" y2="190" stroke="black" />
+                        <line x1="75" y1="170" x2="75" y2="190" stroke="black" />
+
+                    </svg>
+
+                    <div className="text-center font-bold">
+                        SIDE VIEW
+                    </div>
+                </div>
+            </div>
 
             <div
                 className="
