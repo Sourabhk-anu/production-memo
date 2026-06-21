@@ -1,7 +1,10 @@
 import template from "../assets/drawing-template.png";
 import template2 from "../assets/drawing-template2.png";
+import netfil from "../assets/netfil.png";
 
-export default function DrawingPreview({ data, previewRef }) {
+export default function DrawingPreview({ data, rows, previewRef, editRow, deleteRow }) {
+
+    const notesTop = 170 + (rows.length - 1) * 35;
 
     return (
         <div
@@ -15,20 +18,20 @@ export default function DrawingPreview({ data, previewRef }) {
             <img
                 src={template}
                 alt=""
-                className="w-[200px] absolute top-[10px] right-[50px]"
+                className="w-[200px] absolute top-[10px] right-[-10px]"
             />
 
             <img
                 src={template2}
                 alt=""
-                className="w-[200px] absolute top-[250px] right-[50px]"
+                className="w-[200px] absolute top-[250px] right-[-10px]"
             />
 
             <div
                 className="
                     absolute
                     top-[200px]
-                    right-[150px]
+                    right-[-10px]
                     w-[200px]
                     text-center
                     font-bold   
@@ -41,7 +44,7 @@ export default function DrawingPreview({ data, previewRef }) {
 
             {/* TOP TABLE */}
 
-            <div>
+            <div className="absolute left-[5%] top-[20px]">
                 <table className="border-collapse text-center text-xs w-[530px]">
                     <thead>
                         <tr>
@@ -115,50 +118,60 @@ export default function DrawingPreview({ data, previewRef }) {
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td className="border border-black p-2">
-                                {data.srNo}
-                            </td>
 
-                            <td className="border border-black p-2">
-                                {data.size}
-                            </td>
+                        {rows.map((row, index) => (
 
-                            <td className="border border-black p-2">
-                                {data.flangeA}
-                            </td>
+                            <tr key={row.srNo}>
 
-                            <td className="border border-black p-2">
-                                {data.flangeB}
-                            </td>
+                                <td className="border border-black p-2">
+                                    {row.srNo}
+                                </td>
 
-                            <td className="border border-black p-2">
-                                {data.boxC}
-                            </td>
+                                <td className="border border-black p-2">
+                                    {row.size}
+                                </td>
 
-                            <td className="border border-black p-2">
-                                {data.boxD}
-                            </td>
+                                <td className="border border-black p-2">
+                                    {row.flangeA}
+                                </td>
 
-                            <td className="border border-black p-2">
-                                {data.depthE}
-                            </td>
+                                <td className="border border-black p-2">
+                                    {row.flangeB}
+                                </td>
 
-                            <td className="border border-black p-2">
-                                {data.capacityCFM}
-                            </td>
+                                <td className="border border-black p-2">
+                                    {row.boxC}
+                                </td>
 
-                            <td className="border border-black p-2">
-                                {data.qtyNos}
-                            </td>
-                        </tr>
+                                <td className="border border-black p-2">
+                                    {row.boxD}
+                                </td>
+
+                                <td className="border border-black p-2">
+                                    {row.depthE}
+                                </td>
+
+                                <td className="border border-black p-2">
+                                    {row.capacityCFM}
+                                </td>
+
+                                <td className="border border-black p-2">
+                                    {row.qtyNos}
+                                </td>
+
+                            </tr>
+
+                        ))}
+
                     </tbody>
                 </table>
             </div>
 
             {/* NOTES */}
 
-            <div className="absolute top-[170px] left-[5%] text-[14px] font-serif">
+            <div className="absolute left-[5%] text-[14px] font-serif"
+                style={{ top: `${notesTop}px` }}
+            >
 
                 <p className="font-bold">1. ALL DIMENSIONS ARE IN MM</p>
 
@@ -175,17 +188,17 @@ export default function DrawingPreview({ data, previewRef }) {
                 </p>
 
                 <p className="ml-12">
-                    (Pleated Type - Only Air Cleanable)
+                    (Pleated Type - {data.pleatedType})
                 </p>
 
                 <p><span className="font-bold">3. GRADE -</span> {data.grade}</p>
 
                 <p>
-                    <span className="font-bold">4. MICRON RATING -</span> {data.micronRating}
+                    <span className="font-bold">4. MICRON RATING -</span> {data.micronRating} <span>MICRON</span>
                 </p>
 
                 <p>
-                    <span className="font-bold">5. EFFICIENCY -</span> {data.efficiency}
+                    <span className="font-bold">5. EFFICIENCY - </span> {data.efficiency} <span>MICRON</span>
                 </p>
 
                 <p>
@@ -220,7 +233,10 @@ export default function DrawingPreview({ data, previewRef }) {
 
             {/* TOLERANCE */}
 
-            <div className="absolute top-[520px] left-[20%]">
+            <div className="absolute left-[20%]"
+                style={{
+                    top: `${520 + (rows.length - 1) * 35}px`
+                }}>
 
                 <h3 className="font-bold text-lg">
                     Tolerance :
@@ -238,7 +254,7 @@ export default function DrawingPreview({ data, previewRef }) {
 
             {/* TITLE BLOCK */}
 
-            <div className="absolute top-[500px] right-[-150px] w-[33%] text-[8px]">
+            {/* <div className="absolute top-[500px] right-[-150px] w-[33%] text-[8px]">
 
                 <p>
                     CLIENT: {data.client}
@@ -281,6 +297,209 @@ export default function DrawingPreview({ data, previewRef }) {
                         {data.subtitle}
                     </h3>
                 </div>
+            </div> */}
+
+            {/* TITLE BLOCK */}
+
+            <div
+                className="absolute top-[500px] right-[-90px]"
+                style={{
+                    width: "430px",
+                    fontSize: "10px",
+                }}
+            >
+                <table className="border-collapse border border-black w-full">
+                    <tbody>
+
+                        {/* CLIENT */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="4"
+                            >
+                                CLIENT:
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="4"
+                            >
+                                {data.client}
+                            </td>
+                        </tr>
+
+                        {/* REF */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="4"
+                            >
+                                REF:
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="4"
+                            >
+                                {data.poNo}
+                            </td>
+                        </tr>
+
+                        {/* TITLE */}
+                        <tr>
+
+                            <td
+                                className="border border-black p-1 text-center font-bold"
+                                colSpan="6"
+                                rowSpan="3"
+                            >
+                                <div>
+                                    <img
+                                        src={netfil}
+                                        alt=""
+                                        className="w-[300px] my-1 absolute top-[0px]"
+                                    />
+                                </div>
+                                <p className="pt-18">
+                                    <b>
+                                        Survey No. 77/7, Vishnu-Malti Ind. Estate, A/p.Shivane. Tal. Haveli, Pune-23
+                                        Tel.: 020 25293424, Telex.: 020 25293424
+                                    </b>
+                                </p>
+                                <div className="text-lg font-bold">
+                                    TITLE: {data.title}
+                                </div>
+                            </td>
+                        </tr>
+
+                        {/* DRG NO */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="2"
+                            >
+                                DRG. NO.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td
+                                className="border border-black p-1"
+                                colSpan="2"
+                            >
+                                {data.drawingNo}
+                            </td>
+                        </tr>
+
+                        {/* REV */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="2"
+                            >
+                                REV-00
+                            </td>
+
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="2"
+                            >
+                                DRN BY
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="2"
+                            >
+                                {data.drawnBy}
+                            </td>
+
+                            <td
+                                className="border border-black font-bold p-1"
+                            >
+                                CHD BY
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                            >
+                                {data.checkedBy}
+                            </td>
+                        </tr>
+
+                        {/* DATE */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="2"
+                            >
+                                DATE
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="2"
+                            >
+                                {data.date}
+                            </td>
+
+                            <td
+                                className="border border-black font-bold p-1"
+                                colSpan="2"
+                            >
+                                SCALE
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="2"
+                            >
+                                {data.scale}
+                            </td>
+                        </tr>
+
+                        {/* SHEET */}
+                        <tr>
+                            <td
+                                className="border border-black font-bold p-1"
+                            >
+                                NO. OF SHEET
+                            </td>
+
+                            <td
+                                className="border border-black text-center"
+                            >
+                                1
+                            </td>
+
+                            <td
+                                className="border border-black font-bold p-1"
+                            >
+                                SHEET NO.
+                            </td>
+
+                            <td
+                                className="border border-black text-center"
+                            >
+                                1
+                            </td>
+
+                            <td
+                                className="border border-black font-bold p-1"
+                            >
+                                APPD BY
+                            </td>
+
+                            <td
+                                className="border border-black p-1"
+                                colSpan="3"
+                            >
+                                {data.approvedBy}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     );
